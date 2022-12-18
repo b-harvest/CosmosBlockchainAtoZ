@@ -10,7 +10,7 @@ BINARY=$HOME/goApps/bin/gaiad
 MONIKER=cobla-${CHAIN_ID}
 
 
-# init
+# Initialize chain config
 rm -rf $VHOME
 $BINARY init $MONIKER --chain-id $CHAIN_ID --home $VHOME
 
@@ -20,7 +20,7 @@ $BINARY config keyring-backend test --home $VHOME
 $BINARY config output json --home $VHOME
 
 
-# change genesis parameters
+# Change genesis parameters
 sed -i 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uatom\"/g' $VHOME/config/app.toml
 sed -i 's/"stake"/"uatom"/g' $VHOME/config/genesis.json
 sed -i 's%"amount": "10000000"%"amount": "1"%g' $VHOME/config/genesis.json
@@ -31,7 +31,7 @@ sed -i 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHOME/conf
 sed -i 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
 
 
-# change ports
+# Change other options and ports
 sed -i.bak -e "s/^enable = false/enable = true/" $VHOME/config/app.toml
 sed -i.bak -e "s/^swagger = false/swagger = true/" $VHOME/config/app.toml
 sed -i.bak -e "s/^enabled-unsafe-cors = false/enabled-unsafe-cors = true/" $VHOME/config/app.toml
@@ -49,7 +49,7 @@ sed -i.bak -e "s/^laddr = \"tcp:\/\/0.0.0.0:26656\"/laddr = \"tcp:\/\/0.0.0.0:1$
 sed -i.bak -e "s/^prometheus_listen_addr = \":26660\"/prometheus_listen_addr = \":1${CHAIN_CODE}60\"/" $VHOME/config/config.toml
 
 
-# alias
+## Add aliases for shortcut
 cat << EOF | tee >> $HOME/.bashrc
 
 # $CHAIN_ID
@@ -61,17 +61,19 @@ EOF
 source $HOME/.bashrc
 
 
-# create keys of validator and relayer
+# Create keys of validator and relayer
 VALIDATOR=$(echo "$VALIDATOR_MNEMONIC" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
 
 RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
 
 
-# fund to the wallets of validator and relayer
+# Fund wallets of validator and relayer in genesis.json
 AMOUNT=100000000000uatom
 $BINARY add-genesis-account $VALIDATOR $AMOUNT --home $VHOME
 $BINARY add-genesis-account $RELAYER $AMOUNT --home $VHOME
 
+
+# Add new valiadtor into genesis.json
 AMOUNT=5000000000uatom
 $BINARY gentx validator $AMOUNT \
 	--keyring-backend test \
@@ -89,13 +91,22 @@ $BINARY collect-gentxs $VHOME/config/gentx --home $VHOME
 
 $BINARY tendermint unsafe-reset-all --home $VHOME
 
+
+# Use other terminal to make the process run 
 screen -S gaia
-VHOME=/data/local-gaia
-gaiad start --home $VHOME 
+
+VHOME=$HOME/local-gaia
+BINARY=$HOME/goApps/bin/gaiad
+
+$BINARY start --home $VHOME 
+
 Ctrl + a,d 
 
+screen -ls
+screen -R gaia
 
-# bank send test
+
+# Test bank send tx
 $BINARY keys list --home $VHOME | jq
 RELAYER_WALLET=cosmos16wvs22rq5lg4vktxdte3zvqerswf5m6597m5k8
 VALIDATOR_WALLET=cosmos1jputs32a6c5m6f572tp9cpk0n7pvnk4rfpajea

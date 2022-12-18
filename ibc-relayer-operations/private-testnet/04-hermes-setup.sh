@@ -1,3 +1,6 @@
+# Fresh Rust Installation
+# https://www.rust-lang.org/tools/install
+
 # Install hermes 
 VERSION=v1.1.0
 wget https://github.com/informalsystems/hermes/releases/download/$VERSION/hermes-$VERSION-x86_64-unknown-linux-gnu.zip
@@ -10,16 +13,11 @@ sudo apt-get update && sudo apt-get install libssl1.1
 mv hermes $GOPATH/bin/
 hermes version
 
-# hermes healthcheck
+# hermes healthcheck for chain
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
 hermes --config $CONFIG health-check
 
-# Start hermes service 
-screen -S hermes
-CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
-hermes --config $CONFIG start
-Ctrl + A,D
-
-screen -ls
-screen -R hermes
-Ctrl + A,D 
+# Test whether hermes start work
+# CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
+# hermes --config $CONFIG start
+# Ctrl+C 

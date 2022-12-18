@@ -15,11 +15,30 @@ hermes --config $CONFIG keys add --chain $CHAIN_A --mnemonic-file $MNENOMIC --ke
 hermes --config $CONFIG keys add --chain $CHAIN_B --mnemonic-file $MNENOMIC --key-name $KEY_B
 ls $HOME/.hermes/keys
 
+
+
+# Start hermes in other terminal
+screen -S hermes
+CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/config-public.toml
+hermes --config $CONFIG start
+Ctrl + a,d
+
+screen -ls
+screen -R hermes
+Ctrl + a,d
+
+
+
+# Listen chain ibc events
+hermes --config $CONFIG listen  --chain $CHAIN_A
+hermes --config $CONFIG listen  --chain $CHAIN_B
+
+
 # Check ibc client list
 hermes --config $CONFIG query clients --host-chain $CHAIN_A --reference-chain $CHAIN_B
 
 
-# client status and counterparty chain
+# Check client status and counterparty chain
 CLIENT_A=28
 hermes --config $CONFIG query client state --chain $CHAIN_A --client 07-tendermint-$CLIENT_A
 

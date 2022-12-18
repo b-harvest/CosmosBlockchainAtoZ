@@ -2,17 +2,12 @@
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
 MNENOMIC=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/RELAYER_MNEMONIC
 
-
 KEY_A=local-mooncat
 CHAIN_A=local-mooncat
 
 KEY_B=local-gaia
 CHAIN_B=local-gaia
 
-
-# Listen chain events
-hermes --config $CONFIG listen  --chain $CHAIN_A
-hermes --config $CONFIG listen  --chain $CHAIN_B
 
 
 # Send token : Crescent -> Cosmos

@@ -16,21 +16,28 @@ hermes --config $CONFIG keys add --chain $CHAIN_B --mnemonic-file $MNENOMIC --ke
 ls $HOME/.hermes/keys
 
 
-# Start hermes
+# Start hermes in other terminal
 screen -S hermes
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
 hermes --config $CONFIG start
 Ctrl + a,d
 
-# Check ibc client list
-hermes --config $CONFIG query clients --host-chain $CHAIN_A --reference-chain $CHAIN_B
-hermes --config $CONFIG query clients --host-chain $CHAIN_B --reference-chain $CHAIN_A
 
 # Create new channel (with client and connection - automatically created)
 hermes --config $CONFIG create channel --a-chain $CHAIN_A --b-chain $CHAIN_B --a-port transfer --b-port transfer --order unordered --new-client-connection
 
 
-# client status and counterparty chain
+# Check ibc client list
+hermes --config $CONFIG query clients --host-chain $CHAIN_A --reference-chain $CHAIN_B
+hermes --config $CONFIG query clients --host-chain $CHAIN_B --reference-chain $CHAIN_A
+
+
+# Listen chain ibc events
+hermes --config $CONFIG listen  --chain $CHAIN_A
+hermes --config $CONFIG listen  --chain $CHAIN_B
+
+
+# Check client status and counterparty chain
 
 CLIENT_A=0
 hermes --config $CONFIG query client state --chain $CHAIN_A --client 07-tendermint-$CLIENT_A

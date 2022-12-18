@@ -13,16 +13,8 @@ sudo apt-get update && sudo apt-get install libssl1.1
 mv hermes $GOPATH/bin/
 hermes version
 
-# hermes healthcheck
+
+# hermes healthcheck for chain
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/config-public.toml
 hermes --config $CONFIG health-check
 
-# Start hermes service 
-screen -S hermes
-CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/config-public.toml
-hermes --config $CONFIG start
-Ctrl + A,D
-
-screen -ls
-screen -R hermes
-Ctrl + A,D 

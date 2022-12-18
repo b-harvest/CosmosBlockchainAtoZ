@@ -10,11 +10,6 @@ KEY_B=gaia
 CHAIN_B=theta-testnet-001
 
 
-# Listen chain events
-hermes --config $CONFIG listen  --chain $CHAIN_A
-hermes --config $CONFIG listen  --chain $CHAIN_B
-
-
 # Send token : Crescent -> Cosmos
 CRE_NODE=tcp://51.195.63.75:16657
 GAIA_NODE=tcp://51.195.63.75:26657
