@@ -1,3 +1,9 @@
+
+# git clone hands-on repo to $HOME directory
+cd $HOME
+git clone https://github.com/b-harvest/CosmosBlockchainAtoZ.git
+
+
 # CONFIGURATION - CRESCENT
 export CRE_BRANCH=v3.0.0
 export CRE_HOME=/data/local-mooncat
@@ -5,6 +11,7 @@ export CHAIN_ID=local-mooncat
 export NODE_MONIKER=COBLA-CRESCENT
 
 # Build crescentd
+cd $HOME
 git clone https://github.com/crescent-network/crescent
 cd crescent
 git checkout v3.0.0

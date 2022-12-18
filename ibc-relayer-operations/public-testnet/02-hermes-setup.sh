@@ -1,3 +1,6 @@
+# Fresh Rust Installation
+# https://www.rust-lang.org/tools/install
+
 # Install hermes 
 VERSION=v1.1.0
 wget https://github.com/informalsystems/hermes/releases/download/$VERSION/hermes-$VERSION-x86_64-unknown-linux-gnu.zip

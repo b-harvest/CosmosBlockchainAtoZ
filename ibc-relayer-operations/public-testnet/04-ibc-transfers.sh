@@ -1,3 +1,4 @@
+
 # Configuration
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/config-public.toml
 MNEMONIC=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/RELAYER_MNEMONIC

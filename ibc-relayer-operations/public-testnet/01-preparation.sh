@@ -1,5 +1,5 @@
-# git clone tutorial repo 
-cd ~
+# git clone hands-on repo to $HOME directory
+cd $HOME
 git clone https://github.com/b-harvest/CosmosBlockchainAtoZ.git
 
 
@@ -30,12 +30,14 @@ echo "<the relayer mnemonic - 24 words>" > RELAYER_MNEMONIC
 
 # Use the faucet to receive coins 
 
-## Crescent Testent : https://testnet-faucet.crescent.network
+## Crescent Testent
+## Faucet : https://testnet-faucet.crescent.network
 ## > crescentd tx bank send <wallet-name> <receiver-address> 1000000ucre  --node tcp://51.195.63.75:16657
 ## > crescentd q bank balances  <your crescent realyer address>  --node tcp://51.195.63.75:16657
 ## > crescentd q bank balances  cre16wvs22rq5lg4vktxdte3zvqerswf5m65pkg3r2  --node tcp://51.195.63.75:16657
 
-## Cosmos Testnet : #testnet-faucet  - https://discord.com/invite/cosmosnetwork
+## Cosmos Testnet
+## Faucet : #testnet-faucet  - https://discord.com/invite/cosmosnetwork
 ## > gaiad tx bank send <wallet-name> <receiver-address> 1000000uatom  --node tcp://51.195.63.75:26657 --keyring-backend test --chain-id theta-testnet-001
 ## > gaiad q bank balances  <your crescent realyer address>  --node tcp://51.195.63.75:26657
 ## > gaiad q bank balances  cre16wvs22rq5lg4vktxdte3zvqerswf5m65pkg3r2  --node tcp://51.195.63.75:26657
