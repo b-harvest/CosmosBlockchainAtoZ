@@ -1,7 +1,8 @@
 
 # CONFIGURATION
-CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
-MNENOMIC=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/RELAYER_MNEMONIC
+WORK_DIR=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/
+CONFIG=$WORK_DIR/config-private.toml
+MNENOMIC=$WORK_DIR//CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/RELAYER_MNEMONIC
 
 KEY_A=crescent
 CHAIN_A=local-mooncat
@@ -16,11 +17,9 @@ hermes --config $CONFIG keys add --chain $CHAIN_B --mnemonic-file $MNENOMIC --ke
 ls $HOME/.hermes/keys
 
 
-# Start hermes in other terminal
-screen -S hermes
+# Terminal 1 : Start hermes in other terminal
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/config-private.toml
 hermes --config $CONFIG start
-Ctrl + a,d
 
 
 # Create new channel (with client and connection - automatically created)

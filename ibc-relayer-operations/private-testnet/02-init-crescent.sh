@@ -19,18 +19,16 @@ $BINARY config chain-id $CHAIN_ID --home $VHOME
 $BINARY config keyring-backend test --home $VHOME
 $BINARY config output json --home $VHOME
 
-
 # Change genesis parameters
-sed -i 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0ucre,0bcre\"/g' $VHOME/config/app.toml
-sed -i 's/"stake"/"ucre"/g' $VHOME/config/genesis.json
-sed -i 's/"bstake"/"ubcre"/g' $VHOME/config/genesis.json
-sed -i 's%"amount": "10000000"%"amount": "1"%g' $VHOME/config/genesis.json
-sed -i 's%"max_deposit_period": "172800s"%"max_deposit_period": "300s"%g' $VHOME/config/genesis.json
-sed -i 's%"voting_period": "172800s"%"voting_period": "300s"%g' $VHOME/config/genesis.json
-sed -i 's%"inflation": "0.130000000000000000",%"inflation": "0.500000000000000000",%g' $VHOME/config/genesis.json
-sed -i 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHOME/config/genesis.json
-sed -i 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
-
+sed -i.bak -e 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0ucre,0bcre\"/g' $VHOME/config/app.toml
+sed -i.bak -e 's/"stake"/"ucre"/g' $VHOME/config/genesis.json
+sed -i.bak -e 's/"bstake"/"ubcre"/g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"amount": "10000000"%"amount": "1"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"max_deposit_period": "172800s"%"max_deposit_period": "300s"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"voting_period": "172800s"%"voting_period": "300s"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"inflation": "0.130000000000000000",%"inflation": "0.500000000000000000",%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
 
 # Change other options and ports
 sed -i.bak -e "s/^enable = false/enable = true/" $VHOME/config/app.toml
@@ -50,22 +48,16 @@ sed -i.bak -e "s/^laddr = \"tcp:\/\/0.0.0.0:26656\"/laddr = \"tcp:\/\/0.0.0.0:1$
 sed -i.bak -e "s/^prometheus_listen_addr = \":26660\"/prometheus_listen_addr = \":1${CHAIN_CODE}60\"/" $VHOME/config/config.toml
 
 
-## Add aliases for shortcut
-cat << EOF | tee >> $HOME/.bashrc
 
-# $CHAIN_ID
+## Add aliases for shortcut
+
 alias ${CHAIN_CODE}st='$BINARY status --node tcp://127.0.0.1:1${CHAIN_CODE}57 2>&1 | jq'
 alias ${CHAIN_CODE}info='curl -sS http://127.0.0.1:1${CHAIN_CODE}57/net_info | egrep "n_peers|moniker"'
 
-EOF
-
-source $HOME/.bashrc
-
 
 # Create keys of validator and relayer
-CRE_VALIDATOR=$(echo "$VALIDATOR_MNEMONIC" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
-
-CRE_RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
+VALIDATOR=$(echo "$VALIDATOR_MNEMONIC" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
+RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
 
 
 # Fund wallets of validator and relayer in genesis.json
@@ -92,25 +84,21 @@ $BINARY collect-gentxs $VHOME/config/gentx --home $VHOME
 $BINARY tendermint unsafe-reset-all --home $VHOME
 
 
-# Use other terminal to make the process run 
-screen -S mooncat
-
+# Terminal 2 : Use other terminal to make the process run 
 VHOME=$HOME/local-mooncat
 BINARY=$(which crescentd)
 
 $BINARY start --home $VHOME
 
-Ctrl+a,d
 
-screen -ls
-screen -R mooncat
+# Terminal 1 : Test bank send tx
+VHOME=$HOME/local-mooncat
+BINARY=$(which crescentd)
 
-
-# Test bank send tx
 $BINARY keys list --home $VHOME --keyring-backend test
 RELAYER_WALLET=cre16wvs22rq5lg4vktxdte3zvqerswf5m65pkg3r2
 VALIDATOR_WALLET=cre1jputs32a6c5m6f572tp9cpk0n7pvnk4rdfwhvs
-NODE=tcp://127.0.0.1:11157
+CRE_NODE=tcp://127.0.0.1:11157
 
 $BINARY tx bank send relayer $VALIDATOR_WALLET 1ucre --home $VHOME --node $CRE_NODE -y
 

@@ -21,14 +21,14 @@ $BINARY config output json --home $VHOME
 
 
 # Change genesis parameters
-sed -i 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uatom\"/g' $VHOME/config/app.toml
-sed -i 's/"stake"/"uatom"/g' $VHOME/config/genesis.json
-sed -i 's%"amount": "10000000"%"amount": "1"%g' $VHOME/config/genesis.json
-sed -i 's%"max_deposit_period": "172800s"%"max_deposit_period": "300s"%g' $VHOME/config/genesis.json
-sed -i 's%"voting_period": "172800s"%"voting_period": "300s"%g' $VHOME/config/genesis.json
-sed -i 's%"inflation": "0.130000000000000000",%"inflation": "0.500000000000000000",%g' $VHOME/config/genesis.json
-sed -i 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHOME/config/genesis.json
-sed -i 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
+sed -i.bak -e 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0uatom\"/g' $VHOME/config/app.toml
+sed -i.bak -e 's/"stake"/"uatom"/g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"amount": "10000000"%"amount": "1"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"max_deposit_period": "172800s"%"max_deposit_period": "300s"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"voting_period": "172800s"%"voting_period": "300s"%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"inflation": "0.130000000000000000",%"inflation": "0.500000000000000000",%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
 
 
 # Change other options and ports
@@ -50,20 +50,12 @@ sed -i.bak -e "s/^prometheus_listen_addr = \":26660\"/prometheus_listen_addr = \
 
 
 ## Add aliases for shortcut
-cat << EOF | tee >> $HOME/.bashrc
-
-# $CHAIN_ID
 alias ${CHAIN_CODE}st='$BINARY status --node tcp://127.0.0.1:1${CHAIN_CODE}57 2>&1 | jq'
 alias ${CHAIN_CODE}info='curl -sS http://127.0.0.1:1${CHAIN_CODE}57/net_info | egrep "n_peers|moniker"'
-
-EOF
-
-source $HOME/.bashrc
 
 
 # Create keys of validator and relayer
 VALIDATOR=$(echo "$VALIDATOR_MNEMONIC" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
-
 RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
 
 
@@ -92,21 +84,15 @@ $BINARY collect-gentxs $VHOME/config/gentx --home $VHOME
 $BINARY tendermint unsafe-reset-all --home $VHOME
 
 
-# Use other terminal to make the process run 
-screen -S gaia
-
+# Terminal 2 : Use other terminal to make the process run 
 VHOME=$HOME/local-gaia
 BINARY=$(which gaiad)
 
 $BINARY start --home $VHOME 
 
-Ctrl + a,d 
-
-screen -ls
-screen -R gaia
 
 
-# Test bank send tx
+# Terminal 1 : Test bank send tx
 $BINARY keys list --home $VHOME | jq
 RELAYER_WALLET=cosmos16wvs22rq5lg4vktxdte3zvqerswf5m6597m5k8
 VALIDATOR_WALLET=cosmos1jputs32a6c5m6f572tp9cpk0n7pvnk4rfpajea
