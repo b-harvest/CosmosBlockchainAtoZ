@@ -6,7 +6,7 @@ CHAIN_ID=local-gaia
 CHAIN_CODE=12
 
 VHOME=$HOME/local-gaia
-BINARY=$HOME/goApps/bin/gaiad
+BINARY=$(which gaiad)
 MONIKER=cobla-${CHAIN_ID}
 
 
@@ -96,7 +96,7 @@ $BINARY tendermint unsafe-reset-all --home $VHOME
 screen -S gaia
 
 VHOME=$HOME/local-gaia
-BINARY=$HOME/goApps/bin/gaiad
+BINARY=$(which gaiad)
 
 $BINARY start --home $VHOME 
 

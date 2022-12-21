@@ -6,7 +6,7 @@ CHAIN_ID=local-mooncat
 CHAIN_CODE=11
 
 VHOME=$HOME/local-mooncat
-BINARY=$HOME/goApps/bin/crescentd
+BINARY=$(which crescentd)
 MONIKER=cobla-${CHAIN_ID}
 
 
@@ -96,7 +96,7 @@ $BINARY tendermint unsafe-reset-all --home $VHOME
 screen -S mooncat
 
 VHOME=$HOME/local-mooncat
-BINARY=$HOME/goApps/bin/crescentd
+BINARY=$(which crescentd)
 
 $BINARY start --home $VHOME
 

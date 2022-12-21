@@ -17,18 +17,12 @@ ls $HOME/.hermes/keys
 
 
 
-# Start hermes in other terminal
-screen -S hermes
+# Start hermes in Terminal 1
 CONFIG=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet/config-public.toml
 hermes --config $CONFIG start
-Ctrl + a,d
-
-screen -ls
-screen -R hermes
-Ctrl + a,d
 
 
-
+# Open Terminal 2 to test the commands below
 # Listen chain ibc events
 hermes --config $CONFIG listen  --chain $CHAIN_A
 hermes --config $CONFIG listen  --chain $CHAIN_B

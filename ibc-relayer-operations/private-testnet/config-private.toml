@@ -49,7 +49,7 @@ store_prefix = 'ibc'
 default_gas = 3000000
 max_gas = 10000000
 gas_price = { price = 0.00, denom = 'ucre' }
-gas_multiplier = 1.2
+#gas_multiplier = 1.2
 max_msg_num = 30
 max_tx_size = 1800000
 clock_drift = '10s'
@@ -77,7 +77,7 @@ store_prefix = 'ibc'
 default_gas = 2000000
 max_gas = 10000000
 gas_price = { price = 0.00, denom = 'uatom' }
-gas_multiplier = 1.1
+#gas_multiplier = 1.1
 max_msg_num = 25
 max_tx_size = 180000
 clock_drift = '10s'

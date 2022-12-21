@@ -41,6 +41,6 @@ gaiad tx ibc-transfer transfer transfer $CHANNEL $CRESCENT_ADDRESS $AMOUNT --fro
 
 ## Example
 ## gaiad q tx --type=hash <hash of above tx> --node $GAIA_NODE
-## gaiad q tx --type=hash 32673D68CB64FCE081080A4DCBC9EB43468C8314F66266501B81A1E65EB79999 --node $GAIA_NODE
+## gaiad q tx --type=hash FA487D5B5AAB3B238FECA1AFA742056054A25C606ADEAE9A6B2ACFDA04D72CFF --node $GAIA_NODE
 ## crescentd q bank balances cre19whr7x3yppa79s0grhdfkhc4vrhejtchj7twqc --node $CRE_NODE 
 
