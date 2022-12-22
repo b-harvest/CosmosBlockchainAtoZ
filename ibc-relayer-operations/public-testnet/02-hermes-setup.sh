@@ -8,7 +8,7 @@ cd hermes
 git checkout v1.2.0
 cargo build --release --bin hermes
 
-BINARY_PATH=/usr/local/BINARY_PATH
+BINARY_PATH=/usr/local/bin
 sudo mv ./target/release/hermes $BINARY_PATH
 hermes version
 
