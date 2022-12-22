@@ -34,6 +34,7 @@ hermes --config $CONFIG health-check
 
 
 ## MACOS
+### brew install wget
 cd $HOME
 VERSION=v1.2.0
 wget https://github.com/informalsystems/hermes/releases/download/$VERSION/hermes-$VERSION-x86_64-apple-darwin.zip
@@ -41,7 +42,7 @@ unzip hermes-$VERSION-x86_64-apple-darwin.zip
 
 chmod +x hermes
 BINARY_PATH=/usr/local/bin
-mv hermes $BINARY_PATH
+sudo mv hermes $BINARY_PATH
 hermes version
 
 # hermes healthcheck for chain

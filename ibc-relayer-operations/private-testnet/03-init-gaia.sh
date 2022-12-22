@@ -94,11 +94,9 @@ $BINARY start --home $VHOME
 
 # Terminal 1 : Test bank send tx
 $BINARY keys list --home $VHOME | jq
-RELAYER_WALLET=cosmos16wvs22rq5lg4vktxdte3zvqerswf5m6597m5k8
-VALIDATOR_WALLET=cosmos1jputs32a6c5m6f572tp9cpk0n7pvnk4rfpajea
 GAIA_NODE=tcp://127.0.0.1:11257
 
-$BINARY tx bank send relayer $VALIDATOR_WALLET 1uatom --home $VHOME --node $GAIA_NODE -y
+$BINARY tx bank send relayer $VALIDATOR 1uatom --home $VHOME --node $GAIA_NODE -y
 
-$BINARY q bank balances $RELAYER_WALLET --node $GAIA_NODE
-$BINARY q bank balances $VALIDATOR_WALLET --node $GAIA_NODE
+$BINARY q bank balances $RELAYER --node $GAIA_NODE
+$BINARY q bank balances $VALIDATOR --node $GAIA_NODE

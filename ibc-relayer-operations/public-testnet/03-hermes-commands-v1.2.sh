@@ -6,7 +6,7 @@ MNENOMIC=$WORK_DIR/RELAYER_MNEMONIC
 
 KEY_A=crescent
 CHAIN_A=mooncat-2-external
-KEY_FILE_$WORK_DIR/A=crescent.key
+KEY_FILE_A=$WORK_DIR/crescent.key
 
 KEY_B=gaia
 CHAIN_B=theta-testnet-001
@@ -26,8 +26,8 @@ hermes --config $CONFIG start
 
 # Open Terminal 2 to test the commands below
 # Listen chain ibc events
-hermes --config $CONFIG listen  $CHAIN_A
-hermes --config $CONFIG listen  $CHAIN_B
+hermes --config $CONFIG listen --chain $CHAIN_A
+hermes --config $CONFIG listen --chain $CHAIN_B
 
 
 # Check ibc client list

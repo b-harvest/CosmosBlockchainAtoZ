@@ -2,7 +2,7 @@
 # CONFIGURATION
 WORK_DIR=$HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/
 CONFIG=$WORK_DIR/config-private.toml
-MNENOMIC=$WORK_DIR//CosmosBlockchainAtoZ/ibc-relayer-operations/private-testnet/RELAYER_MNEMONIC
+MNENOMIC=$WORK_DIR/RELAYER_MNEMONIC
 
 KEY_A=crescent
 CHAIN_A=local-mooncat

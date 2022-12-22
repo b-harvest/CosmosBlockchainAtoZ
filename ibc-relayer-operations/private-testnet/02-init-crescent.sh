@@ -96,11 +96,9 @@ VHOME=$HOME/local-mooncat
 BINARY=$(which crescentd)
 
 $BINARY keys list --home $VHOME --keyring-backend test
-RELAYER_WALLET=cre16wvs22rq5lg4vktxdte3zvqerswf5m65pkg3r2
-VALIDATOR_WALLET=cre1jputs32a6c5m6f572tp9cpk0n7pvnk4rdfwhvs
 CRE_NODE=tcp://127.0.0.1:11157
 
-$BINARY tx bank send relayer $VALIDATOR_WALLET 1ucre --home $VHOME --node $CRE_NODE -y
+$BINARY tx bank send relayer $VALIDATOR 1ucre --home $VHOME --node $CRE_NODE -y
 
-$BINARY q bank balances $RELAYER_WALLET --node $CRE_NODE
-$BINARY q bank balances $VALIDATOR_WALLET --node $CRE_NODE
+$BINARY q bank balances $RELAYER --node $CRE_NODE
+$BINARY q bank balances $VALIDATOR --node $CRE_NODE
