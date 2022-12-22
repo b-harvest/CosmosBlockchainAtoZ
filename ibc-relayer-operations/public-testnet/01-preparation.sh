@@ -1,5 +1,6 @@
 
 # CONFIGURATION - CRESCENT
+su - ubuntu
 export CRE_BRANCH=v3.0.0
 export CRE_HOME=$HOME/local-mooncat
 export CHAIN_ID=local-mooncat
@@ -12,8 +13,10 @@ cd crescent
 git checkout v3.0.0
 make install
 
+crescentd version
 
 # CONFIGURATION - GAIA
+su - ubuntu
 export GAIA_BRANCH=v7.0.3
 export GAIA_HOME=$HOME/local-gaia
 export CHAIN_ID=local-gaia
@@ -28,7 +31,7 @@ make install
 
 
 # get an wallet address for Crescent and its mnemonic
-crescentd keys add relayer --keyring-backend test --output json 
+crescentd keys add relayer --keyring-backend test --output json --recover
 
 ## Example
 ## Crescent Wallet : cre1e2r48kgec2twyp5t3yc6lr6ad9mrzy9yx6wl0e
@@ -54,7 +57,7 @@ git clone https://github.com/b-harvest/CosmosBlockchainAtoZ.git
 # Save the relayer mnemonic to RELAYER_MNEMONIC file
 cd $HOME/CosmosBlockchainAtoZ/ibc-relayer-operations/public-testnet
 echo "<the relayer mnemonic - 24 words>" > RELAYER_MNEMONIC
-echo "need vanish business stereo beyond promote boat badge tilt frozen soul drive hero medal gown regular adapt mass auction traffic between speed neither exotic"  > RELAYER_MNEMONIC
+echo "require man please wheat sword spoil razor error recipe cactus coin forward punch capable front someone move pyramid remain begin artist senior possible enforce"  > RELAYER_MNEMONIC
 ## Example
 ## > echo "extend caution mushroom hobby yard pelican couple scout broccoli shiver emotion once recycle able picture tiny illegal aunt wine demise target video canvas find" > RELAYER_MNEMONIC
 
