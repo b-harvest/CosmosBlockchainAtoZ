@@ -23,6 +23,7 @@ hermes --config $CONFIG start
 
 
 # Create new channel (with client and connection - automatically created)
+# This takes several mintues to complete
 hermes --config $CONFIG create channel --a-chain $CHAIN_A --b-chain $CHAIN_B --a-port transfer --b-port transfer --order unordered --new-client-connection
 
 

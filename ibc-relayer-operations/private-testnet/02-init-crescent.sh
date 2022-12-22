@@ -95,8 +95,10 @@ $BINARY start --home $VHOME
 VHOME=$HOME/local-mooncat
 BINARY=$(which crescentd)
 
-$BINARY keys list --home $VHOME --keyring-backend test
+#$BINARY keys list --home $VHOME --keyring-backend test | jq
 CRE_NODE=tcp://127.0.0.1:11157
+RELAYER=$($BINARY keys show relayer -a --home $VHOME --keyring-backend test)
+VALIDATOR=$($BINARY keys show validator -a --home $VHOME --keyring-backend test)
 
 $BINARY tx bank send relayer $VALIDATOR 1ucre --home $VHOME --node $CRE_NODE -y
 

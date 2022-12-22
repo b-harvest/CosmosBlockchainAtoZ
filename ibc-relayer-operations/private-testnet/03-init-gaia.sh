@@ -93,8 +93,10 @@ $BINARY start --home $VHOME
 
 
 # Terminal 1 : Test bank send tx
-$BINARY keys list --home $VHOME | jq
+#$BINARY keys list --home $VHOME --keyring-backend test | jq
 GAIA_NODE=tcp://127.0.0.1:11257
+RELAYER=$($BINARY keys show relayer -a --home $VHOME --keyring-backend test)
+VALIDATOR=$($BINARY keys show validator -a --home $VHOME --keyring-backend test)
 
 $BINARY tx bank send relayer $VALIDATOR 1uatom --home $VHOME --node $GAIA_NODE -y
 
