@@ -27,7 +27,7 @@ crescentd tx ibc-transfer transfer transfer $CHANNEL $COSMOS_ADDRESS $AMOUNT --f
 ## crescentd q tx --type=hash <hash of above tx> --node $CRE_NODE 
 ## crescentd q tx --type=hash 8E8673184015DC37D61CCCA4E53B02B834723153227B8C20391DF6E5021E8019 --node $CRE_NODE 
 ## gaiad q bank balances cosmos19whr7x3yppa79s0grhdfkhc4vrhejtchkkct44 --node $GAIA_NODE 
-
+gaiad q bank balances $COSMOS_ADDRESS --node $GAIA_NODE 
 
 # Send token : Cosmos -> Crescent
 CRESCENT_ADDRESS=cre19whr7x3yppa79s0grhdfkhc4vrhejtchj7twqc
