@@ -14,7 +14,7 @@ CHAIN_B=theta-testnet-001
 CRE_NODE=tcp://51.195.63.75:16657
 GAIA_NODE=tcp://51.195.63.75:26657
 
-COSMOS_ADDRESS=cosmos19whr7x3yppa79s0grhdfkhc4vrhejtchkkct44
+COSMOS_ADDRESS=cosmos1g0f9kmy9ehuvzymh0naz0mmfpw40llxscnnge5
 AMOUNT=1000ucre
 FEE=25ucre
 CHANNEL=channel-25
@@ -25,7 +25,8 @@ crescentd tx ibc-transfer transfer transfer $CHANNEL $COSMOS_ADDRESS $AMOUNT --f
 
 ## Example
 ## crescentd q tx --type=hash <hash of above tx> --node $CRE_NODE 
-## crescentd q tx --type=hash 8E8673184015DC37D61CCCA4E53B02B834723153227B8C20391DF6E5021E8019 --node $CRE_NODE 
+## crescentd q tx --type=hash 354B045F07FCA0F2A0B5EAC5FA3E7769754BD312FF9C221034093441226627D4 --node $CRE_NODE 
+
 ## gaiad q bank balances cosmos19whr7x3yppa79s0grhdfkhc4vrhejtchkkct44 --node $GAIA_NODE 
 gaiad q bank balances $COSMOS_ADDRESS --node $GAIA_NODE 
 
