@@ -32,7 +32,7 @@ sed -i.bak -e 's%"unbonding_time": "1814400s",%"unbonding_time": "300s",%g' $VHO
 sed -i.bak -e 's%"downtime_jail_duration": "600s",%"downtime_jail_duration": "60s",%g' $VHOME/config/genesis.json
 
 # Add whitelist validator
-sed -i.bak -e 's%"whitelisted_validators": \[\],%"whitelisted_validators": \[{\"validator_address\": \"crevaloper1jputs32a6c5m6f572tp9cpk0n7pvnk4r0awcp6\",\"target_weight\": \"1\"}\],%g' $VHOME/config/genesis.json
+sed -i.bak -e 's%"whitelisted_validators": \[\],%"whitelisted_validators": \[{\"validator_address\": \"crevaloper1pjelxr9745772tfpma4jzllvrw4xqx9jum4ah4\",\"target_weight\": \"1\"}\],%g' $VHOME/config/genesis.json
 
 
 
@@ -109,8 +109,8 @@ VALIDATOR_1_WALLET=cre1jputs32a6c5m6f572tp9cpk0n7pvnk4rdfwhvs
 VALIDATOR_2_WALLET=cre1856zhx99w9a0xtdxlgp36j7jyuw30hshm44nj6
 CRE_NODE=tcp://127.0.0.1:11157
 
+$BINARY tx bank send relayer $VALIDATOR_1_WALLET 1ucre --home $VHOME --node $CRE_NODE -y
+
 $BINARY q bank balances $RELAYER_WALLET --node $CRE_NODE
 $BINARY q bank balances $VALIDATOR_1_WALLET --node $CRE_NODE
 $BINARY q bank balances $VALIDATOR_2_WALLET --node $CRE_NODE
-
-$BINARY tx bank send relayer $VALIDATOR_1_WALLET 1ucre --home $VHOME --node $CRE_NODE -y

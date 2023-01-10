@@ -1,7 +1,7 @@
 # VARIABLES
-MNEMONIC_RELAYER=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_RELAYER)
-MNEMONIC_VALIDATOR_1=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_VALIDATOR_1)
-MNEMONIC_VALIDATOR_2=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_VALIDATOR_2)
+RELAYER_MNEMONIC=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_RELAYER)
+VALIDATOR_1_MNEMONIC=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_VALIDATOR_1)
+VALIDATOR_2_MNEMONIC=$(cat $HOME/CosmosBlockchainAtoZ/local-testnet/MNEMONIC_VALIDATOR_2)
 
 CHAIN_ID=local-gaia
 CHAIN_CODE=12
@@ -56,13 +56,13 @@ alias ${CHAIN_CODE}info='curl -sS http://127.0.0.1:1${CHAIN_CODE}57/net_info | e
 
 
 # Create keys of validator and relayer
-VALIDATOR_1=$(echo "$MNEMONIC_VALIDATOR_1" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
-VALIDATOR_2=$(echo "$MNEMONIC_VALIDATOR_2" | $BINARY keys add validator2 --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
-RELAYER=$(echo "$MNEMONIC_RELAYER" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
+VALIDATOR_1=$(echo "$VALIDATOR_1_MNEMONIC" | $BINARY keys add validator --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
+VALIDATOR_2=$(echo "$VALIDATOR_2_MNEMONIC" | $BINARY keys add validator2 --recover --keyring-backend test --output json --home $VHOME 2>&1| jq -r '.address')
+RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --output json --home $VHOME 2>&1 | jq -r '.address')
 
 
 # Fund wallets of validator and relayer in genesis.json
-AMOUNT=100000000000000uatom
+AMOUNT=1000000000000uatom
 $BINARY add-genesis-account $VALIDATOR_1 $AMOUNT --home $VHOME
 $BINARY add-genesis-account $VALIDATOR_2 $AMOUNT --home $VHOME
 $BINARY add-genesis-account $RELAYER $AMOUNT --home $VHOME
