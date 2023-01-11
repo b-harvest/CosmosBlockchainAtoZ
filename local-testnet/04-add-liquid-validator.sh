@@ -48,5 +48,9 @@ crescentd tx  liquidstaking  liquid-stake 100000000000ucre --from $WALLET --home
 
 crescentd q bank balances $(crescentd keys show $WALLET -a --home $HOME/local-mooncat)
 
+crescentd config node tcp://0.0.0.0:11157
+crescentd config chain-id local-mooncat
+crescentd config
+
 
 

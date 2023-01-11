@@ -68,7 +68,7 @@ RELAYER=$(echo "$RELAYER_MNEMONIC" | $BINARY keys add relayer --recover  --keyri
 
 
 # Fund wallets of validator and relayer in genesis.json
-AMOUNT=1000000000000ucre
+AMOUNT=10000000000000ucre
 $BINARY add-genesis-account $VALIDATOR_1 $AMOUNT --home $VHOME
 $BINARY add-genesis-account $VALIDATOR_2 $AMOUNT --home $VHOME
 $BINARY add-genesis-account $RELAYER $AMOUNT --home $VHOME
