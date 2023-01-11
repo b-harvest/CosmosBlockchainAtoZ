@@ -29,11 +29,11 @@ cd modules-test-tool
 git checkout mm-order
 make install
 
-tester mm-order 1 1.05 0.99 10000000 1.01 0.95 10000000 10 20
+tester mm-order 1 1.05 0.99 10000000 1.01 0.95 10000000 200 200000
 
 
-http://3.38.23.155:8080/
-http://3.39.12.247:8080/
+2c8g - http://3.38.23.155:8080
+4c32g - http://3.39.12.247:8080
 
 go tool trace -http 0.0.0.0:8080 trace.out
 go tool pprof -http 0.0.0.0:8080 goroutine.pprof
