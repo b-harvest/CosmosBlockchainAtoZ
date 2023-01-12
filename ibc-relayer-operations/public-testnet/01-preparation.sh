@@ -39,7 +39,7 @@ make install
 
 
 # get an wallet address for Crescent and its mnemonic
-crescentd keys add relayer --keyring-backend test --output json
+crescentd keys add relayer --keyring-backend test --output json --recover
 
 ## Example
 ## Crescent Wallet : cre1e2r48kgec2twyp5t3yc6lr6ad9mrzy9yx6wl0e
